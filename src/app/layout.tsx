@@ -1,7 +1,5 @@
-import { anilistClient } from '@/services/anilistGraphql'
 import '@/styles/globals.css'
 import { getAnimesPerPage } from '@/utils/getAnimesPerPage'
-import { gql } from '@apollo/client'
 
 export const metadata = {
   title: 'Create Next App',
