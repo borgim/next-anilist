@@ -1,13 +1,15 @@
 import { gql } from "@apollo/client";
 
-export const getAnimesPerPageQuery = gql`
+export const GET_ANIMES_PAGE = gql`
   query getAnimesPerPage($page: Int, $perPage: Int) {
     Page(page: $page, perPage: $perPage) {
       pageInfo {
         total
         currentPage
+        hasNextPage
       }
       media {
+        id
         coverImage {
           medium
         }
@@ -15,6 +17,10 @@ export const getAnimesPerPageQuery = gql`
           english
           native
         }
+        format
+        seasonYear
+        status
+        episodes
       }
     }
   }
