@@ -1,18 +1,14 @@
 import { AnimeCard } from "./AnimeCard"
 
 interface IAnime {
-  id: number
-  title: {
-    english: string
-    native: string
-  }
-  coverImage: {
-    large: string
-  }
-  episodes: number
-  seasonYear: number
-  status: string
-  format: string
+  id?: number;
+  englishTitle?: string;
+  nativeTitle: string;
+  coverImage: string;
+  episodes?: number;
+  seasonYear?: number;
+  status?: string;
+  format?: string;
 }
 
 type AnimeListType = {
@@ -26,10 +22,10 @@ export const AnimeList = ({ animes }: AnimeListType) => {
         animes.map((anime: IAnime) => {
           return (
             <AnimeCard 
-              key={anime?.title?.native} 
-              englishTitle={anime.title?.english} 
-              nativeTitle={anime.title?.native} 
-              coverImage={anime?.coverImage?.large} 
+              key={anime?.nativeTitle} 
+              englishTitle={anime?.englishTitle} 
+              nativeTitle={anime?.nativeTitle} 
+              coverImage={anime?.coverImage} 
             />
           )
         })

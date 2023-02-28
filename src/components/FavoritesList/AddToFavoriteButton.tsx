@@ -22,10 +22,6 @@ export const AddToFavoriteButton = ({ anime }: AnimeType) => {
 
   const { addAnime, favoriteAnimes } = useFavoriteAnimesStore()
 
-  const alreadyInFavorite = favoriteAnimes.find(favoriteAnime => favoriteAnime.id === anime.id)
-
-  console.log("in favorites", alreadyInFavorite)
-
   return (
     <button className="flex items-center justify-center gap-2 w-full bg-[purple] hover:text-white p-2 rounded-lg" onClick={() => addAnime(anime)}>
       Add to favorites
