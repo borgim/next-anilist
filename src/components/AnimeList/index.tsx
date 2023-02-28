@@ -26,10 +26,10 @@ export const AnimeList = ({ animes }: AnimeListType) => {
         animes.map((anime: IAnime) => {
           return (
             <AnimeCard 
-              key={anime.title.native} 
-              englishTitle={anime.title.english} 
-              nativeTitle={anime.title.native} 
-              coverImage={anime.coverImage.large} 
+              key={anime?.title?.native} 
+              englishTitle={anime.title?.english} 
+              nativeTitle={anime.title?.native} 
+              coverImage={anime?.coverImage?.large} 
             />
           )
         })
