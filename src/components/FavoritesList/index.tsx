@@ -7,7 +7,6 @@ export const FavoritesList = () => {
 
   const { favoriteAnimes } = useFavoriteAnimesStore()
 
-  console.log("favorite animes", favoriteAnimes)
   return (
     <>
       <AnimeList animes={favoriteAnimes} />

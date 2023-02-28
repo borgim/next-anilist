@@ -36,7 +36,7 @@ export const useFavoriteAnimesStore = create<AnimeListType>((set) => ({
   },
   removeAnime: (anime: IAnime) => {
     set((state) => ({
-      favoriteAnimes: state.favoriteAnimes.filter((item) => item.id !== anime.id)
+      favoriteAnimes: state.favoriteAnimes.filter((item) => item.nativeTitle !== anime.nativeTitle)
     }))
   }
 }));
