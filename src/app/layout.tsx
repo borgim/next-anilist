@@ -1,3 +1,4 @@
+import { Header } from '@/components/Header'
 import '@/styles/globals.css'
 import { getAnimesPerPage } from '@/utils/getAnimesPerPage'
 
@@ -38,7 +39,10 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className='flex bg-slate-900'>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
