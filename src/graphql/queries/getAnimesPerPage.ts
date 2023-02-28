@@ -11,7 +11,7 @@ export const GET_ANIMES_PAGE = gql`
       media {
         id
         coverImage {
-          medium
+          large
         }
         title {
           english

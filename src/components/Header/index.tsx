@@ -27,7 +27,7 @@ export const Header = () => {
   ]
 
   return (
-    <header className='flex flex-col bg-slate-800 w-20 h-screen gap-10 pt-5'>
+    <header className='flex flex-col bg-slate-800 w-20 min-h-screen gap-10 pt-5 fixed'>
       <span>
         <Link href="/" className='flex flex-col items-center'>
           <FileVideo2 size={40} color="purple" />
