@@ -1,8 +1,7 @@
 'use client'
 
-import { useSelectedLayoutSegment } from 'next/navigation'
+import { useSelectedLayoutSegment } from "next/navigation"
 import Link from "next/link"
-
 interface INavLinkProps {
   name: string
   href: string

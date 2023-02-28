@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Home, Star, FileVideo2 } from 'lucide-react'
+import { Home, Star, FileVideo2, Github } from 'lucide-react'
 import { NavLinks } from './NavLinks'
 
 export const Header = () => {
@@ -42,6 +42,10 @@ export const Header = () => {
             )
           })
         }
+        <Link href="https://github.com/borgim/next-anilist" className="flex flex-col items-center p-5 text-white" target="_blank">
+          <Github />
+          Github
+        </Link>
       </nav>
     </header>
   )
