@@ -20,7 +20,7 @@ export default async function Home() {
 
   const data: IAnime[] = await getAnimesPerPage(1, 10)
 
-  const animeData = data.map((anime) => {
+  const animeData = data.map((anime: IAnime) => {
     return {
       id: anime.id,
       englishTitle: anime.title.english,
