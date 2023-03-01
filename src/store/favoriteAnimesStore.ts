@@ -1,4 +1,6 @@
-import { create } from "zustand"
+import { json } from "stream/consumers";
+import { create } from "zustand";
+// import { persist, createJSONStorage } from "zustand/middleware"
 
 interface IAnime {
   id?: number;
@@ -18,29 +20,59 @@ type AnimeListType = {
   removeAnime: (anime: IAnime) => void;
 };
 
+const getInitialFavoriteAnimes = () => {
+  const list = JSON.parse(localStorage.getItem("favoriteAnimes") || '[]')
+
+  return list
+}
+
+const initialFavoritesCounter = getInitialFavoriteAnimes().length
+
 export const useFavoriteAnimesStore = create<AnimeListType>((set) => ({
-  favoriteAnimes: [],
-  favoritesCounter: 0,
+  favoriteAnimes: getInitialFavoriteAnimes(),
+  favoritesCounter: initialFavoritesCounter,
   addAnime: (anime: IAnime) => {
-    set((state) => ({
-      favoriteAnimes: [
-        ...state.favoriteAnimes,
+    set(
+      (state) => (
+        localStorage.setItem(
+          "favoriteAnimes",
+          JSON.stringify([...state.favoriteAnimes, anime])
+        ),
         {
-          coverImage: anime.coverImage,
-          englishTitle: anime.englishTitle,
-          episodes: anime.episodes,
-          format: anime.format,
-          id: anime.id,
-          nativeTitle: anime.nativeTitle,
+          favoriteAnimes: [
+            ...state.favoriteAnimes,
+            {
+              coverImage: anime.coverImage,
+              englishTitle: anime.englishTitle,
+              episodes: anime.episodes,
+              format: anime.format,
+              id: anime.id,
+              nativeTitle: anime.nativeTitle,
+            },
+          ],
+          favoritesCounter: state.favoritesCounter + 1,
         }
-      ],
-      favoritesCounter: state.favoritesCounter + 1
-    }))
+      )
+    );
   },
   removeAnime: (anime: IAnime) => {
-    set((state) => ({
-      favoriteAnimes: state.favoriteAnimes.filter((item) => item.nativeTitle !== anime.nativeTitle),
-      favoritesCounter: state.favoritesCounter - 1
-    }))
-  }
+    set(
+      (state) => (
+        localStorage.setItem(
+          "favoriteAnimes",
+          JSON.stringify(
+            state.favoriteAnimes.filter(
+              (item) => item.nativeTitle !== anime.nativeTitle
+            )
+          )
+        ),
+        {
+          favoriteAnimes: state.favoriteAnimes.filter(
+            (item) => item.nativeTitle !== anime.nativeTitle
+          ),
+          favoritesCounter: state.favoritesCounter - 1,
+        }
+      )
+    );
+  },
 }));

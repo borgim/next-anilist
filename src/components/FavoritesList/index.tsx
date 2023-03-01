@@ -5,11 +5,11 @@ import { AnimeList } from "../AnimeList"
 
 export const FavoritesList = () => {
 
-  const { favoriteAnimes } = useFavoriteAnimesStore()
+  const { favoriteAnimes, favoritesCounter } = useFavoriteAnimesStore()
 
   return (
     <>
-      <AnimeList animes={favoriteAnimes} />
+      {favoritesCounter !== 0 ? <AnimeList animes={favoriteAnimes} /> : "Your list is empty"}
     </>
   )
 }
