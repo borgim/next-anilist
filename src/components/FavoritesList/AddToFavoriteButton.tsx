@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect, useState } from "react"
+
 import { useFavoriteAnimesStore } from "@/store/favoriteAnimesStore"
 import { isAnimeInFavoriteList } from "@/utils/isAnimeInFavoriteList"
 import { Star } from "lucide-react"
@@ -21,9 +23,15 @@ type AnimeType = {
 
 export const AddToFavoriteButton = ({ anime }: AnimeType) => {
 
+  const [animeList, setAnimeList] = useState<IAddToFavoritesButtonProps[]>([])
+
   const { addAnime, removeAnime, favoriteAnimes } = useFavoriteAnimesStore()
 
   const animeNativeTitle = anime.nativeTitle
+
+  useEffect(() => {
+    setAnimeList(favoriteAnimes)
+  }, [favoriteAnimes])
 
   const RemoveFromFavoritesButton = () => {
     return (
@@ -42,7 +50,7 @@ export const AddToFavoriteButton = ({ anime }: AnimeType) => {
     )
   }
 
-  const isAnimeAlreadyInFavorites = isAnimeInFavoriteList(animeNativeTitle, favoriteAnimes)
+  const isAnimeAlreadyInFavorites = isAnimeInFavoriteList(animeNativeTitle, animeList)
 
   return (
     <>

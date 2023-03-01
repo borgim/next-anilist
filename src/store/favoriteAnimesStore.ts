@@ -1,6 +1,5 @@
-import { json } from "stream/consumers";
 import { create } from "zustand";
-// import { persist, createJSONStorage } from "zustand/middleware"
+import { persist } from "zustand/middleware"
 
 interface IAnime {
   id?: number;
@@ -20,25 +19,13 @@ type AnimeListType = {
   removeAnime: (anime: IAnime) => void;
 };
 
-const getInitialFavoriteAnimes = () => {
-  const list = JSON.parse(localStorage.getItem("favoriteAnimes") || '[]')
-
-  return list
-}
-
-const initialFavoritesCounter = getInitialFavoriteAnimes().length
-
-export const useFavoriteAnimesStore = create<AnimeListType>((set) => ({
-  favoriteAnimes: getInitialFavoriteAnimes(),
-  favoritesCounter: initialFavoritesCounter,
-  addAnime: (anime: IAnime) => {
-    set(
-      (state) => (
-        localStorage.setItem(
-          "favoriteAnimes",
-          JSON.stringify([...state.favoriteAnimes, anime])
-        ),
-        {
+export const useFavoriteAnimesStore = create(
+  persist<AnimeListType>(
+    (set) => ({
+      favoriteAnimes: [],
+      favoritesCounter: 0,
+      addAnime: (anime: IAnime) => {
+        set((state) => ({
           favoriteAnimes: [
             ...state.favoriteAnimes,
             {
@@ -51,28 +38,19 @@ export const useFavoriteAnimesStore = create<AnimeListType>((set) => ({
             },
           ],
           favoritesCounter: state.favoritesCounter + 1,
-        }
-      )
-    );
-  },
-  removeAnime: (anime: IAnime) => {
-    set(
-      (state) => (
-        localStorage.setItem(
-          "favoriteAnimes",
-          JSON.stringify(
-            state.favoriteAnimes.filter(
-              (item) => item.nativeTitle !== anime.nativeTitle
-            )
-          )
-        ),
-        {
+        }));
+      },
+      removeAnime: (anime: IAnime) => {
+        set((state) => ({
           favoriteAnimes: state.favoriteAnimes.filter(
             (item) => item.nativeTitle !== anime.nativeTitle
           ),
           favoritesCounter: state.favoritesCounter - 1,
-        }
-      )
-    );
-  },
-}));
+        }));
+      },
+    }),
+    {
+      name: "favorite-animes",
+    }
+  )
+);
