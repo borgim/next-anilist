@@ -20,6 +20,7 @@ export default async function Home() {
 
   const data: IAnime[] = await getAnimesPerPage(1, 10)
 
+  //normalizing animes return
   const animeData = data.map((anime: IAnime) => {
     return {
       id: anime.id,
@@ -32,7 +33,6 @@ export default async function Home() {
       format: anime.format
     }
   })
-
 
   return (
     <div className="flex flex-col gap-14 w-full ml-32 pt-5">

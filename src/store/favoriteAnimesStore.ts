@@ -25,7 +25,7 @@ export const useFavoriteAnimesStore = create(
       favoriteAnimes: [],
       favoritesCounter: 0,
       addAnime: (anime: IAnime) => {
-        set((state) => ({
+        set((state: AnimeListType) => ({
           favoriteAnimes: [
             ...state.favoriteAnimes,
             {
@@ -41,9 +41,9 @@ export const useFavoriteAnimesStore = create(
         }));
       },
       removeAnime: (anime: IAnime) => {
-        set((state) => ({
+        set((state: AnimeListType) => ({
           favoriteAnimes: state.favoriteAnimes.filter(
-            (item) => item.nativeTitle !== anime.nativeTitle
+            (item: IAnime) => item.nativeTitle !== anime.nativeTitle
           ),
           favoritesCounter: state.favoritesCounter - 1,
         }));

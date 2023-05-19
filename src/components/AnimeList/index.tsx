@@ -23,13 +23,10 @@ export const AnimeList = ({ animes }: AnimeListType) => {
           return (
             <AnimeCard 
               key={anime?.nativeTitle} 
-              englishTitle={anime?.englishTitle} 
-              nativeTitle={anime?.nativeTitle} 
-              coverImage={anime?.coverImage} 
+              {...anime}
             />
           )
         })
-
       }
     </div>
   )

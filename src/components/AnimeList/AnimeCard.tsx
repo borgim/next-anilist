@@ -1,4 +1,3 @@
-import { Star } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { AddToFavoriteButton } from "../FavoritesList/AddToFavoriteButton"
@@ -14,20 +13,23 @@ interface IAnimeCardProps {
   format?: string
 }
 
-export const AnimeCard = ({ englishTitle, nativeTitle, coverImage }: IAnimeCardProps) => {
-  const anime = {
-    englishTitle,
-    nativeTitle,
-    coverImage
-  }
-
+export const AnimeCard = ({ ...anime }: IAnimeCardProps) => {
   return (
-    <div className="w-60 h-[29rem] flex flex-col items-center justify-between hover:bg-slate-800 hover:scale-[1.2] hover:p-2 hover:rounded-lg hover:shadow-2xl">
-      <Link href={``}>
-        <Image src={coverImage} alt="" width="240" height="340" className="w-[240px] h-[340px] rounded-t-lg" />
+    <div className="w-60 h-[29rem] flex flex-col items-center justify-between hover:bg-slate-800 hover:scale-[1.2] transition-all hover:p-2 hover:rounded-lg hover:shadow-2xl hover:z-10">
+      <Link href={``} className="relative">
+        <Image src={anime.coverImage} alt="" width="240" height="340" className="w-[240px] h-[340px] rounded-t-lg" />
+        <div className="flex justify-between w-full px-2 absolute top-0">
+          <span className="bg-orange-600 text-white px-2">{anime.episodes}ep</span>
+          <span className="text-pink-700 font-extrabold">{anime.format}</span>
+        </div>
         <div className="flex flex-col items-center">
-          <h4 className="text-white font-semibold text-center">{englishTitle}</h4>
-          <h5 className="text-slate-400 text-center text-sm">{nativeTitle}</h5>
+          {anime.englishTitle
+            ?
+            <h4 className="text-white font-semibold text-center">{anime.englishTitle}</h4>
+            :
+            <h4 className="text-white font-semibold text-center">{anime.nativeTitle}</h4>
+          }
+          <span className="text-gray-600">{anime.seasonYear}</span>
         </div>
       </Link>
       <AddToFavoriteButton anime={anime} />
